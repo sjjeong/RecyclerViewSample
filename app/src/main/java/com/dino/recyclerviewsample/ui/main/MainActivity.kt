@@ -1,6 +1,7 @@
 package com.dino.recyclerviewsample.ui.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,9 +13,9 @@ import com.dino.recyclerviewsample.ui.main.item.MainItem
 import com.dino.recyclerviewsample.ui.main.item.TextItem
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainAdapter.Handler {
     private lateinit var binding: ActivityMainBinding
-    private val adapter = MainAdapter()
+    private val adapter = MainAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,5 +38,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    override fun onTextItemClicked(item: TextItem) {
+        Toast.makeText(this, item.text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onButtonItemClicked(item: ButtonItem) {
+        Toast.makeText(this, item.text, Toast.LENGTH_SHORT).show()
     }
 }
